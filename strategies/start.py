@@ -16,7 +16,7 @@ now = now.strftime("%Y-%m-%d %H:%M:%S")
 
 strategy_file_path = "./one_strategy/strategies/happy.py"
 def start():
-    init()
+    # init()
     engine = DB.get_conn()
     read_sql_query = pd.read_sql_query('select * from my_stocks',con = engine)
     data = pd.DataFrame(read_sql_query)
