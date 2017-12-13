@@ -9,7 +9,7 @@ import time,sched
 import schedule
 import time
 import datetime
-import Queue
+import queue
 import threading
 
 from email import encoders
@@ -515,7 +515,7 @@ def worker_main():
         job_func()
 
 def init():
-    jobqueue = Queue.Queue()
+    jobqueue = queue.Queue(maxsize = 10)
 
     # worker_thread = threading.Thread(target=worker_main)
     # worker_thread.start()
