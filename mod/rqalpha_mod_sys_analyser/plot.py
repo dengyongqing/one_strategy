@@ -40,9 +40,6 @@ def plot_result(result_dict, show_windows=True, savefile=None):
 
     use_chinese_fonts = True
     font = findfont(FontProperties(family=['sans-serif']))
-    system_log.warn('*********************************')
-    system_log.warn(font)
-    system_log.warn('*********************************')
     if "/matplotlib/" in font:
         use_chinese_fonts = False
         system_log.warn("Missing Chinese fonts. Fallback to English.")
