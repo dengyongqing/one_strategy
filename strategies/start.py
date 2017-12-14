@@ -39,8 +39,8 @@ def start():
                   "enabled": True,
                   "plot": False,
                 #   "output_file": '/Users/dengyongqing/my_work/one_strategy/examples/result.pkl',
-                  "plot_save_file": './one_data/rq_result/' + row.code + '.png',
-                  # "plot_save_file": './rq_result/' + row.code + '.png',
+                  "plot_save_file": './one_data/static/' + row.code + '.png',
+                  # "plot_save_file": './static/' + row.code + '.png',
                 }
               }
             }
