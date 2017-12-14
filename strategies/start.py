@@ -21,7 +21,7 @@ def start():
     read_sql_query = pd.read_sql_query('select * from my_stocks',con = engine)
     data = pd.DataFrame(read_sql_query)
     for index, row in data.iterrows():   # 获取每行的index、row
-            print('开始生成成功......' + row.code)
+            print('开始生成图片......' + row.code)
             config = {
               "base": {
                 "start_date": "2010-01-01",
@@ -39,7 +39,8 @@ def start():
                   "enabled": True,
                   "plot": False,
                 #   "output_file": '/Users/dengyongqing/my_work/one_strategy/examples/result.pkl',
-                  "plot_save_file": './one_data/rq_result/' + row.code + '.png',
+                  # "plot_save_file": './one_data/rq_result/' + row.code + '.png',
+                  "plot_save_file": './rq_result/' + row.code + '.png',
                 }
               }
             }
