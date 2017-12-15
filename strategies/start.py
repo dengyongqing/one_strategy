@@ -22,7 +22,6 @@ def start():
     data = pd.DataFrame(read_sql_query)
     for index, row in data.iterrows():   # 获取每行的index、row
         try:
-          print('开始生成图片......' + row.code)
           config = {
             "base": {
               "start_date": "2010-01-01",
@@ -33,7 +32,7 @@ def start():
               }
             },
             "extra": {
-              # "log_level": "error",
+              "log_level": "error",
               "user_system_log_disabled": True,
             },
             "mod": {
@@ -46,14 +45,16 @@ def start():
               }
             }
           }
+          print('开始生成图片......' + row.code)
           run_file(strategy_file_path, config)
+          time.sleep(5)
           print('生成图片成功......' + row.code)
         except Exception as e:
           print(e)
 
 start()
 
-schedule.every(1).minutes.do(start)
+schedule.every(5).minutes.do(start)
 while 1:
     schedule.run_pending()
     time.sleep(1)
