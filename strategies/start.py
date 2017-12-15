@@ -8,6 +8,7 @@ import schedule
 import time
 import datetime
 import pandas as pd
+import gc
 
 now = datetime.datetime.now()
 year = int(now.strftime('%Y'))  
@@ -47,6 +48,7 @@ def start():
           }
           print('开始生成图片......' + row.code)
           run_file(strategy_file_path, config)
+          gc.collect()
           time.sleep(5)
           print('生成图片成功......' + row.code)
         except Exception as e:
