@@ -78,6 +78,7 @@ def start():
     data = pd.DataFrame(read_sql_query)
     for index, row in data.iterrows():   # 获取每行的index、row
         try:
+          with daemon.DaemonContext():
             temp_run_file(row)
         except Exception as e:
           print(e)
@@ -109,8 +110,8 @@ def temp_run_file(row):
       }
     }
     print('开始生成图片......' + row.code)
-    # run_file(strategy_file_path, config)
-    run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
+    run_file(strategy_file_path, config)
+    # run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
     print('生成图片成功......' + row.code)
 
 start()
