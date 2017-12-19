@@ -84,9 +84,10 @@ def start():
     count = 1
     for index, row in data.iterrows():   # 获取每行的index、row
         try:
-            _thread.start_new_thread(temp_run_file(row), ("Thread-" + count, count, ) )
-            count += 1
+            # _thread.start_new_thread(temp_run_file(row), ("Thread-" + count, count, ) )
+            # count += 1
             time.sleep(10)
+            temp_run_file(row)
             # temp_run_file(row)
         except Exception as e:
           print(e)
