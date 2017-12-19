@@ -9,10 +9,14 @@ import time
 import datetime
 import pandas as pd
 import gc
-import daemon
+from daemon import Daemon
 
 from rqalpha.api import *
 from rqalpha import run_func
+
+import os
+import threading
+import multiprocessing
 
 # 在这个方法中编写任何的初始化逻辑。context对象将会在你的算法策略的任何方法之间做传递。
 def init(context):
@@ -78,7 +82,6 @@ def start():
     data = pd.DataFrame(read_sql_query)
     for index, row in data.iterrows():   # 获取每行的index、row
         try:
-          with daemon.DaemonContext():
             temp_run_file(row)
         except Exception as e:
           print(e)
@@ -115,6 +118,16 @@ def temp_run_file(row):
     print('生成图片成功......' + row.code)
 
 start()
+
+if __name__ == '__main__':
+
+    d = multiprocessing.Process(name='start',
+                                target=start)
+    d.daemon = True
+    d.start()
+    d.join(1)
+    print ('d.is_alive()', d.is_alive())
+
 # 您可以指定您要传递的参数
 # run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
     
