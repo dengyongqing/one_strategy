@@ -86,7 +86,7 @@ def start():
         try:
             # _thread.start_new_thread(temp_run_file(row), ("Thread-" + count, count, ) )
             # count += 1
-            time.sleep(10)
+            time.sleep(20)
             temp_run_file(row)
             # temp_run_file(row)
         except Exception as e:
