@@ -110,15 +110,15 @@ def temp_run_file(row):
         "sys_analyser": {
           "enabled": True,
           "plot": False,
-        #   "output_file": '/Users/dengyongqing/my_work/one_strategy/examples/result.pkl',
-          "plot_save_file": './one_data/static/' + row.code + '.png',
+          "output_file": './one_data/static/' + row.code + '.pkl',
+          # "plot_save_file": './one_data/static/' + row.code + '.png',
           # "plot_save_file": './static/' + row.code + '.png',
         }
       }
     }
     print('开始生成图片......' + row.code)
-    run_file(strategy_file_path, config)
-    # run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
+    # run_file(strategy_file_path, config)
+    run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
     print('生成图片成功......' + row.code)
 
 # start()
