@@ -87,6 +87,11 @@ if __name__ == '__main__':
       
     # do the UNIX double-fork magic, see Stevens' "Advanced
     # Programming in the UNIX Environment" for details (ISBN 0201563177)
+
+    engine = DB.get_conn()
+    read_sql_query = pd.read_sql_query('select * from my_stocks',con = engine)
+    data = pd.DataFrame(read_sql_query)
+
     try:
         pid = os.fork()
         if pid > 0:
@@ -111,7 +116,18 @@ if __name__ == '__main__':
         sys.exit(1)
     # start the daemon main loop
     # main()
-    start()
+
+    for index, row in data.iterrows():   # 获取每行的index、row
+        try:
+            # _thread.start_new_thread(temp_run_file(row), ("Thread-" + count, count, ) )
+            # time.sleep(10)
+            # count += 1
+            temp_run_file(row)
+            # temp_run_file(row)
+        except Exception as e:
+          print(e)
+
+    # start()
    
 # schedule.every(5).minutes.do(start)
 # while 1:
