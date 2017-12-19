@@ -78,7 +78,9 @@ def temp_run_file(row):
       if os.path.exists('./one_data/static/' + row.code + '.png'):
             print('生成图片成功......' + row.code)
             break
+    time.sleep(5)
     gc.collect()
+    time.sleep(5)
     # run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
     
 if __name__ == '__main__':
