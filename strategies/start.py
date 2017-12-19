@@ -112,7 +112,7 @@ def temp_run_file(row):
         "sys_analyser": {
           "enabled": True,
           "plot": False,
-          "output_file": './one_data/static/' + row.code + '.pkl',
+          "output_file": './one_data/static/' + row.code + '.png',
           # "plot_save_file": './one_data/static/' + row.code + '.png',
           # "plot_save_file": './static/' + row.code + '.png',
         }
@@ -126,7 +126,7 @@ def temp_run_file(row):
       end_time = time.time()
       if (end_time - start_time) > 30000:
             break
-      if os.path.exists('./one_data/static/' + row.code + '.pkl'):
+      if os.path.exists('./one_data/static/' + row.code + '.png'):
             print('生成图片成功......' + row.code)
             break
     gc.collect()
