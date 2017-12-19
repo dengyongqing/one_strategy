@@ -85,8 +85,8 @@ def start():
     for index, row in data.iterrows():   # 获取每行的index、row
         try:
             # _thread.start_new_thread(temp_run_file(row), ("Thread-" + count, count, ) )
+            # time.sleep(10)
             # count += 1
-            time.sleep(20)
             temp_run_file(row)
             # temp_run_file(row)
         except Exception as e:
@@ -119,16 +119,25 @@ def temp_run_file(row):
       }
     }
     print('开始生成图片......' + row.code)
-    # run_file(strategy_file_path, config)
-    run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
-    print('生成图片成功......' + row.code)
+    start_time = time.time()
+    run_file(strategy_file_path, config)
+
+    while 1:
+      end_time = time.time()
+      if (end_time - start_time) > 30000:
+            break
+      if os.path.exists('./one_data/static/' + row.code + '.pkl'):
+            print('生成图片成功......' + row.code)
+            break
+          
+    # run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
+    
 
 # start()
 
 if __name__ == '__main__':
     start()
-    # d = multiprocessing.Process(name='start',
-    #                             target=start)
+    # d = multiprocessing.Process(name='start', target=start)
     # d.daemon = True
     # d.start()
     # d.join(1)
