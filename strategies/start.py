@@ -129,7 +129,7 @@ def temp_run_file(row):
       if os.path.exists('./one_data/static/' + row.code + '.pkl'):
             print('生成图片成功......' + row.code)
             break
-          
+    gc.collect()
     # run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
     
 
