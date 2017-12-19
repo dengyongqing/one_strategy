@@ -17,6 +17,7 @@ from rqalpha import run_func
 import os
 import threading
 import multiprocessing
+import _thread
 
 # 在这个方法中编写任何的初始化逻辑。context对象将会在你的算法策略的任何方法之间做传递。
 def init(context):
@@ -80,9 +81,12 @@ def start():
     engine = DB.get_conn()
     read_sql_query = pd.read_sql_query('select * from my_stocks',con = engine)
     data = pd.DataFrame(read_sql_query)
+    count = 1
     for index, row in data.iterrows():   # 获取每行的index、row
         try:
-            temp_run_file(row)
+            _thread.start_new_thread(temp_run_file(row), ("Thread-" + count, count, ) )
+            count += 1
+            # temp_run_file(row)
         except Exception as e:
           print(e)
 
@@ -117,16 +121,16 @@ def temp_run_file(row):
     # run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
     print('生成图片成功......' + row.code)
 
-start()
+# start()
 
 if __name__ == '__main__':
-
-    d = multiprocessing.Process(name='start',
-                                target=start)
-    d.daemon = True
-    d.start()
-    d.join(1)
-    print ('d.is_alive()', d.is_alive())
+    start()
+    # d = multiprocessing.Process(name='start',
+    #                             target=start)
+    # d.daemon = True
+    # d.start()
+    # d.join(1)
+    # print ('d.is_alive()', d.is_alive())
 
 # 您可以指定您要传递的参数
 # run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
