@@ -14,7 +14,7 @@ from daemon import Daemon
 from rqalpha.api import *
 from rqalpha import run_func
 
-import os
+import sys, os
 import threading
 import multiprocessing
 
@@ -78,12 +78,39 @@ def temp_run_file(row):
       if os.path.exists('./one_data/static/' + row.code + '.png'):
             print('生成图片成功......' + row.code)
             break
-    time.sleep(5)
+    # time.sleep(5)
     gc.collect()
-    time.sleep(5)
+    # time.sleep(5)
     # run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
     
 if __name__ == '__main__':
+      
+    # do the UNIX double-fork magic, see Stevens' "Advanced
+    # Programming in the UNIX Environment" for details (ISBN 0201563177)
+    try:
+        pid = os.fork()
+        if pid > 0:
+            # exit first parent
+            sys.exit(0)
+    except Exception as e:
+        # print ("fork #1 failed: %d (%s)" % (e.errno, e.strerror))
+        sys.exit(1)
+    # decouple from parent environment
+    # os.chdir("/")
+    os.setsid()
+    os.umask(0)
+    # do second fork
+    try:
+        pid = os.fork()
+        if pid > 0:
+            # exit from second parent, print eventual PID before
+            # print ("Daemon PID %d" % pid)
+            sys.exit(0)
+    except Exception as e:
+        # print ("fork #2 failed: %d (%s)" % (e.errno, e.strerror))
+        sys.exit(1)
+    # start the daemon main loop
+    # main()
     start()
    
 # schedule.every(5).minutes.do(start)
