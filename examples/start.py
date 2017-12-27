@@ -20,7 +20,7 @@ config = {
     "sys_analyser": {
       "enabled": True,
       "plot": False,
-    #   "output_file": '/Users/dengyongqing/my_work/one_strategy/examples/result.pkl',
+    #   "output_file": '/work/one_strategy/examples/result.pkl',
       "plot_save_file": './',
     }
   }

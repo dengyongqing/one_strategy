@@ -11,14 +11,17 @@ import time
 import datetime
 import queue
 import threading
+import sys, os
 
 from email import encoders
 from email.header import Header
 from email.mime.text import MIMEText
 from email.utils import parseaddr, formataddr
+from mail.mail import send_mail
 import smtplib
 import json
 import random
+from db.db import get_db_connect
 
 now = datetime.datetime.now()
 year = int(now.strftime('%Y'))  
@@ -26,6 +29,7 @@ today = now.strftime('%Y-%m-%d')
 now = now.strftime("%Y-%m-%d %H:%M:%S")
 
 engine = create_engine('postgresql://postgres:142857@47.93.193.128:5432/tushare') 
+# engine = get_db_connect()
 # engine = create_engine('postgresql://tushare@localhost:5432/tushare')
 # 交易数据
 def job_1():
@@ -34,8 +38,10 @@ def job_1():
         # 股票列表
         stock_basics = ts.get_stock_basics()
         data = pd.DataFrame(stock_basics)
+        
         data.to_sql('stock_basics',engine,index=True,if_exists='replace')
         count = 1;
+        print('data')
         for index, row in data.iterrows():   # 获取每行的index、row
             if_exists = 'append'
             if count == 1: 
@@ -430,59 +436,6 @@ def job_9():
     except Exception as e:
         print(e)
 
-# 一个选股策略
-def job_10():
-    print("I'm working......选股策略")
-    # 股票列表
-    stock_basics = ts.get_stock_basics()
-    data = pd.DataFrame(stock_basics)
-    data = data[(data['npr']>30) & (data['gpr']>30) & (data['rev']>20) & (data['profit']>20) & (data['pe']<40)]
-    data.to_sql('my_stocks',engine,index=True,if_exists='replace')
-
-    my_stocks = ''
-    for index, row in data.iterrows():   # 获取每行的index、row
-        my_stocks = my_stocks + '\n' + row.name + '_' + row['name']
-        print(json.dumps(row['name']))
-    # print(my_stocks)
-   
-    send_mail('dengyongqing@aliyun.com', my_stocks) #邓永庆
-    send_mail('13816904330@163.com', my_stocks) #姜老板
-    send_mail('317223343@qq.com', my_stocks) #陈贵
-    send_mail('312204337@qq.com', my_stocks) #汤东强
-
-    print("选股策略......done")
-
-def _format_addr(s):
-    name, addr = parseaddr(s)
-    return formataddr(( \
-        Header(name, 'utf-8').encode(), \
-        addr.encode('utf-8') if isinstance(addr, unicode) else addr))
-
-def send_mail(to, stocks):
-    # from_addr = raw_input('From: ')
-    # password = raw_input('Password: ')
-    # to_addr = raw_input('To: ')
-    # smtp_server = raw_input('SMTP server: ')
-    print("I'm working......发送邮件")
-
-    from_addr = 'dengyongqing_json@aliyun.com'
-    password = 'Dfzr.Rrqs@1'
-    to_addr = 'dengyongqing@aliyun.com'
-    smtp_server = 'smtp.aliyun.com'
-    # random.uniform(10, 20)
-    msg = MIMEText(stocks, 'plain', 'utf-8')
-    msg['From'] = _format_addr(u'小安策略 %s' % (from_addr))
-    msg['To'] = _format_addr(u'friends <%s>' % to)
-    msg['Subject'] = Header(u'来自未来的问候……', 'utf-8').encode()
-
-    server = smtplib.SMTP(smtp_server, 25)
-    server.set_debuglevel(1)
-    server.login(from_addr, password)
-    server.sendmail(from_addr, [to], msg.as_string())
-    server.quit()
-    print("发送邮件......done")
-   
-
 # 开始任务
 def start():
     print("I'm working......start")
@@ -509,19 +462,15 @@ def work():
     except Exception as e:
         print(e)
 
-def worker_main():
-    while 1:
-        job_func = jobqueue.get()
-        job_func()
+# def worker_main():
+#     while 1:
+#         job_func = jobqueue.get()
+#         job_func()
 
-def init():
-    jobqueue = queue.Queue(maxsize = 10)
-
+def init_data():
+    # jobqueue = queue.Queue(maxsize = 10)
     # worker_thread = threading.Thread(target=worker_main)
     # worker_thread.start()
-
-    work()
-    # job_10()
     job_1()
     job_2()
     job_3()
@@ -531,8 +480,3 @@ def init():
     job_7()
     job_8()
     job_9()
-
-    while 1:
-        schedule.run_pending()
-        time.sleep(1)
-

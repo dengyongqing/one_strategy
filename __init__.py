@@ -25,7 +25,7 @@ from rqalpha.api.api_base import export_as_api
 
 __all__ = [
     '__version__',
-    'version_info'
+    'version_info',
 ]
 
 __version__ = pkgutil.get_data(__package__, 'VERSION.txt').decode('ascii').strip()
