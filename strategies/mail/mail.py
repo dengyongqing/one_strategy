@@ -117,7 +117,7 @@ def get_trade_temp(stock, flag):
     datetime = stock.datetime
     today = datetime.strftime('%Y-%m-%d')
 
-    url = "http://47.93.193.128/controllers/happy?code=" + code
+    url = "http://47.93.193.128/happy?code=" + code
     msg = """
             <div style="padding: 10px; border: 1px dashed #bbb;">
                 <p>
@@ -164,7 +164,7 @@ def get_choose_temp(stocks, flag):
             holders = str(stock.holders) # holders,股东人数
             
             today = get_today()  
-            url = "http://47.93.193.128/controllers/happy?code=" + code
+            url = "http://47.93.193.128/happy?code=" + code
             msg = """
             <div style="padding: 10px; border: 1px dashed #bbb; margin-bottom: 20px;">
                 <p>
