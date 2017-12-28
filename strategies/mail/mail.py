@@ -16,8 +16,8 @@ mail_user="dengyongqing@aliyun.com"    #用户名
 mail_pass="Dfzr.Rrqs@1"   #口令 
 
 sender = ['dengyongqing@aliyun.com']
-receivers = ['dengyongqing_json@aliyun.com']
-# receivers = ['dengyongqing_json@aliyun.com', '13816904330@163.com', '317223343@qq.com', '312204337@qq.com']
+# receivers = ['dengyongqing_json@aliyun.com']
+receivers = ['dengyongqing_json@aliyun.com', '13816904330@163.com', '317223343@qq.com', '312204337@qq.com']
 
 def send_mail(stock, flag):
     for mail in receivers:   # 获取每行的index、row
