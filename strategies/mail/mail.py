@@ -12,12 +12,21 @@ import time
 import datetime
 
 mail_host="smtp.aliyun.com"  #设置服务器
-mail_user="dengyongqing@aliyun.com"    #用户名
+mail_user="dengyongqing_json@aliyun.com"    #用户名
 mail_pass="Dfzr.Rrqs@1"   #口令 
 
-sender = ['dengyongqing@aliyun.com']
-# receivers = ['dengyongqing_json@aliyun.com']
-receivers = ['dengyongqing_json@aliyun.com', '13816904330@163.com', '317223343@qq.com', '312204337@qq.com']
+sender = ['dengyongqing_json@aliyun.com']
+# receivers = ['dengyongqing@aliyun.com']
+receivers = [
+    'dengyongqing@aliyun.com', 
+    '1148674087@qq.com',    #邓永康
+    '13816904330@163.com', #姜飞标
+    '317223343@qq.com',    #陈贵
+    '312204337@qq.com',    #汤东强
+    '511868788@qq.com',    #田世峰
+    '448943531@qq.com',    #杨少文
+    '196863227@qq.com',    #joshua
+    ]
 
 def send_mail(stock, flag):
     for mail in receivers:   # 获取每行的index、row
@@ -157,7 +166,6 @@ def get_choose_temp(stocks, flag):
             pe = str(stock.pe) # pe,市盈率
             rev = str(stock.rev) # rev,收入同比(%)
             profit = str(stock.profit) # profit,利润同比(%)
-            close = str(stock.profit) # 收盘价
             gpr = str(stock.gpr) # gpr,毛利率(%)
             npr = str(stock.npr) # npr,净利润率(%)
             esp = str(stock.esp) # esp,每股收益
@@ -175,9 +183,6 @@ def get_choose_temp(stocks, flag):
                 </p>
                 <p>
                     日期："""+today+"""
-                </p>
-                <p>
-                    收盘价："""+close+"""
                 </p>
                 <p>
                     市盈率："""+pe+"""
