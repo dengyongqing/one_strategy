@@ -2,7 +2,7 @@
 from rqalpha import run_file
 from rqalpha.utils import scheduler
 from db.db import get_db_connect
-from data.init import init_data
+# from data.init import init_data
 from choose import choose
 import schedule
 import time
@@ -24,8 +24,6 @@ from mail.mail import send_mail
 strategy_file_path = "./one_strategy/strategies/happy.py"
 
 def start():
-    os.system('rqalpha update_bundle')
-    init_data()
     choose()
     engine = get_db_connect()
     read_sql_query = pd.read_sql_query('select * from my_stocks',con = engine)
