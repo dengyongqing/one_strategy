@@ -7,7 +7,6 @@ from email import encoders
 from email.header import Header
 from email.mime.text import MIMEText
 from email.utils import parseaddr, formataddr
-from mail.mail import send_mail
 
 import time
 import datetime
@@ -59,11 +58,13 @@ def handle_bar(context, bar_dict):
         order_percent(code, 1)
         if (context.today == today and context.projectName == 'one_strategy'):
             print(code + '_' + name + '********************买入')
+            from mail.mail import send_mail
             send_mail(stock, 'buy')
     if mpe > 50:
         order_percent(code, -1)
         if (context.today == today and context.projectName == 'one_strategy'):
             print(code + '_' + name + '********************卖出')
+            from mail.mail import send_mail
             send_mail(stock, 'sell')
 
     # if not context.fired:
