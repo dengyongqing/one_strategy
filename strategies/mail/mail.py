@@ -11,22 +11,22 @@ import random
 import time
 import datetime
 
-mail_host="smtp.aliyun.com"  #设置服务器
-mail_user="dengyongqing_json@aliyun.com"    #用户名
-mail_pass="Dfzr.Rrqs@1"   #口令 
+mail_host="smtp.qq.com"  #设置服务器
+mail_user="1715620917@qq.com"    #用户名
+mail_pass="aagtpoeanndxbigj"   #口令 
 
-sender = ['dengyongqing_json@aliyun.com']
-# receivers = ['dengyongqing@aliyun.com']
-receivers = [
-    'dengyongqing@aliyun.com', 
-    '1148674087@qq.com',    #邓永康
-    '13816904330@163.com', #姜飞标
-    '317223343@qq.com',    #陈贵
-    '312204337@qq.com',    #汤东强
-    '511868788@qq.com',    #田世峰
-    '448943531@qq.com',    #杨少文
-    '196863227@qq.com',    #joshua
-    ]
+sender = ['1715620917@qq.com']
+receivers = ['dengyongqing@aliyun.com']
+# receivers = [
+#     'dengyongqing@aliyun.com', 
+#     '1148674087@qq.com',    #邓永康
+#     '13816904330@163.com', #姜飞标
+#     '317223343@qq.com',    #陈贵
+#     '312204337@qq.com',    #汤东强
+#     '511868788@qq.com',    #田世峰
+#     '448943531@qq.com',    #杨少文
+#     '196863227@qq.com',    #joshua
+#     ]
 
 def send_mail(stock, flag):
     for mail in receivers:   # 获取每行的index、row
@@ -58,10 +58,14 @@ def send_choose_mail(sender, receivers, stocks):
     message['Subject'] = Header(subject, 'utf-8')
     
     try:
-        smtpObj = smtplib.SMTP() 
-        smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
+        # smtpObj = smtplib.SMTP() 
+        # smtpObj.connect(mail_host, 587)    # 25 为 SMTP 端口号
+
+        smtpObj = smtplib.SMTP_SSL(mail_host, 465)  
+
         smtpObj.login(mail_user,mail_pass)
         smtpObj.sendmail(sender, receivers, message.as_string())
+        smtpObj.quit()
         print ("邮件发送成功")
     except (smtplib.SMTPException, Exception) as e:
         print (e)
@@ -83,8 +87,10 @@ def send_buy_mail(sender, receivers, stock):
     message['Subject'] = Header(subject, 'utf-8')
     
     try:
-        smtpObj = smtplib.SMTP() 
-        smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
+        # smtpObj = smtplib.SMTP() 
+        # smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
+
+        smtpObj = smtplib.SMTP_SSL(mail_host, 465) 
         smtpObj.login(mail_user,mail_pass)
         smtpObj.sendmail(sender, receivers, message.as_string())
         print ("邮件发送成功")
@@ -108,8 +114,10 @@ def send_sell_mail(sender, receivers, stock):
     message['Subject'] = Header(subject, 'utf-8')
     
     try:
-        smtpObj = smtplib.SMTP() 
-        smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
+        # smtpObj = smtplib.SMTP() 
+        # smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
+
+        smtpObj = smtplib.SMTP_SSL(mail_host, 465) 
         smtpObj.login(mail_user,mail_pass)
         smtpObj.sendmail(sender, receivers, message.as_string())
         print ("邮件发送成功")
