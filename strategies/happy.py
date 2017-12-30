@@ -57,12 +57,12 @@ def handle_bar(context, bar_dict):
     mpe = close / esp
     if mpe < 30:
         order_percent(code, 1)
-        if context.today == today:
+        if (context.today == today and context.projectName == 'one_strategy'):
             print(code + '_' + name + '********************买入')
             send_mail(stock, 'buy')
     if mpe > 50:
         order_percent(code, -1)
-        if context.today == today:
+        if (context.today == today and context.projectName == 'one_strategy'):
             print(code + '_' + name + '********************卖出')
             send_mail(stock, 'sell')
 

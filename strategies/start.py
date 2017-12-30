@@ -13,6 +13,7 @@ import gc
 from rqalpha.api import *
 from rqalpha import run_func
 from happy import *
+import settings
 
 import sys, os
 import threading
@@ -36,7 +37,7 @@ def start():
           print(e)
 
 def temp_run_file(row): 
-    temp_context = {'esp': row.esp, 'code': add_tag(row.code)}
+    temp_context = {'esp': row.esp, 'code': add_tag(row.code), 'projectName': settings.PROJECT_NAME}
     config = {
       "base": {
         "start_date": "2010-01-01",
