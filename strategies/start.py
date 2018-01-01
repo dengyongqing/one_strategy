@@ -31,7 +31,6 @@ def start():
     for index, row in data.iterrows():   # 获取每行的index、row
         try:
             temp_run_file(row)
-            time.sleep(15)
             gc.collect()
         except Exception as e:
           print(e)
