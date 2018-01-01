@@ -65,7 +65,6 @@ def send_choose_mail(sender, receivers, stocks):
 
         smtpObj.login(mail_user,mail_pass)
         smtpObj.sendmail(sender, receivers, message.as_string())
-        smtpObj.quit()
         print ("邮件发送成功")
     except (smtplib.SMTPException, Exception) as e:
         print (e)

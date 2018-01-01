@@ -31,6 +31,8 @@ def start():
     for index, row in data.iterrows():   # 获取每行的index、row
         try:
             temp_run_file(row)
+            time.sleep(15)
+            gc.collect()
         except Exception as e:
           print(e)
 
@@ -60,9 +62,10 @@ def temp_run_file(row):
         }
       }
     }
+    print('开始运行策略-------' + row.code)
     run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
     # run_file(strategy_file_path, config)
-    # print('分析完成-------' + row.code)
+    print('策略运行成功-------' + row.code)
 
 def add_tag(code):
       if len(code) == 5:
@@ -82,7 +85,7 @@ def get_today():
 
 
 start()
-schedule.every().day.at("17:00").do(start).tag('my_job')
-while 1:
-    schedule.run_pending()
-    time.sleep(1)
+# schedule.every().day.at("17:00").do(start).tag('my_job')
+# while 1:
+#     schedule.run_pending()
+#     time.sleep(1)
