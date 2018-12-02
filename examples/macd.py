@@ -50,3 +50,4 @@ def handle_bar(context, bar_dict):
     if macd[-1] - signal[-1] > 0 and macd[-2] - signal[-2] < 0:
         # 满仓入股
         order_target_percent(context.s1, 1)
+

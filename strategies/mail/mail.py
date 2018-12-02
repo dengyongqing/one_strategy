@@ -16,17 +16,17 @@ mail_user="1715620917@qq.com"    #用户名
 mail_pass="aagtpoeanndxbigj"   #口令 
 
 sender = ['1715620917@qq.com']
-# receivers = ['dengyongqing@aliyun.com']
-receivers = [
-    'dengyongqing@aliyun.com', 
-    '1148674087@qq.com',    #邓永康
-    '13816904330@163.com', #姜飞标
-    '317223343@qq.com',    #陈贵
-    '312204337@qq.com',    #汤东强
-    '511868788@qq.com',    #田世峰
-    '448943531@qq.com',    #杨少文
-    '196863227@qq.com',    #joshua
-    ]
+receivers = ['dengyongqing@aliyun.com']
+# receivers = [
+#     'dengyongqing@aliyun.com', 
+#     '1148674087@qq.com',    #邓永康
+#     '13816904330@163.com', #姜飞标
+#     '317223343@qq.com',    #陈贵
+#     '312204337@qq.com',    #汤东强
+#     '511868788@qq.com',    #田世峰
+#     '448943531@qq.com',    #杨少文
+#     '196863227@qq.com',    #joshua
+#     ]
 
 def send_mail(stock, flag):
     for mail in receivers:   # 获取每行的index、row
@@ -53,6 +53,7 @@ def send_choose_mail(sender, receivers, stocks):
     message['From'] = formataddr(["小安", "dengyongqing@aliyun.com"])
     message['To'] =  Header('小安', 'utf-8')
     
+    print("***********************************")
     now = get_now()  
     subject = '小安策略' + '(' + now + ')'
     message['Subject'] = Header(subject, 'utf-8')
@@ -171,13 +172,19 @@ def get_choose_temp(stocks, flag):
             name = str(stock['name'])
 
             pe = str(stock.pe) # pe,市盈率
+            pb = str(stock.pb) # pd,市净率
             rev = str(stock.rev) # rev,收入同比(%)
             profit = str(stock.profit) # profit,利润同比(%)
             gpr = str(stock.gpr) # gpr,毛利率(%)
             npr = str(stock.npr) # npr,净利润率(%)
             esp = str(stock.esp) # esp,每股收益
+            roe = str(stock.roe) # roe,净资产收益率
+            
+            # profits_yoy = str(stock.profits_yoy) # profits_yoy, 净利润同比
             holders = str(stock.holders) # holders,股东人数
             
+            # data = data[(data['npr']>30) & (data['roe']>30) & (data['rev']>20) & (data['profits_yoy']>20) & (data['profit']>20) & (data['pb']<10) & (data['pe']<40)]
+
             today = get_today()  
             url = "http://47.93.193.128/happy?code=" + code
             msg = """
@@ -195,20 +202,23 @@ def get_choose_temp(stocks, flag):
                     市盈率："""+pe+"""
                 </p>
                 <p>
-                    收入同比(%)："""+rev+"""
-                </p>
-                <p>
-                    毛利率(%)："""+gpr+"""
+                    市净率："""+pb+"""
                 </p>
                 <p>
                     净利润率(%)："""+npr+"""
                 </p>
                 <p>
-                    每股收益："""+esp+"""
+                    净资产收益率(%)："""+roe+"""
                 </p>
+
                 <p>
-                    股东人数："""+holders+"""
+                    收入同比(%)："""+rev+"""
                 </p>
+               
+                <p>
+                    净利润同比："""+profit+"""
+                </p>
+
                 <p>
                     操作类型：<span style="color: red;">买入</span>
                 </p>

@@ -61,10 +61,10 @@ def temp_run_file(row):
         }
       }
     }
-    print('开始运行策略-------' + row.code)
+    print('开始运行策略-------' + row.name)
     run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
     # run_file(strategy_file_path, config)
-    print('策略运行成功-------' + row.code)
+    print('策略运行成功-------' + row.name)
 
 def add_tag(code):
       if len(code) == 5:

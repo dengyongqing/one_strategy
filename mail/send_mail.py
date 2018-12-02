@@ -56,7 +56,7 @@ def send_choose_mail(sender, receivers, stock):
     print("I'm working......发送邮件")
 
     from_addr = 'dengyongqing_json@aliyun.com'
-    password = 'Dfzr.Rrqs@1'
+    password = ''
     to_addr = 'dengyongqing@aliyun.com'
     smtp_server = 'smtp.aliyun.com'
     # random.uniform(10, 20)
@@ -145,7 +145,7 @@ def send_sell_mail(sender, receivers, stock):
     print("I'm working......发送邮件")
 
     from_addr = 'dengyongqing_json@aliyun.com'
-    password = 'Dfzr.Rrqs@1'
+    password = ''
     to_addr = 'dengyongqing@aliyun.com'
     smtp_server = 'smtp.aliyun.com'
     # random.uniform(10, 20)

@@ -28,7 +28,7 @@ year = int(now.strftime('%Y'))
 today = now.strftime('%Y-%m-%d')  
 now = now.strftime("%Y-%m-%d %H:%M:%S")
 
-engine = create_engine('postgresql://postgres:142857@47.93.193.128:5432/tushare') 
+engine = create_engine('postgresql://postgres:142857@47.93.193.128:5432/xiaoan') 
 # engine = get_db_connect()
 # engine = create_engine('postgresql://tushare@localhost:5432/tushare')
 # 交易数据
@@ -49,6 +49,7 @@ def job_1():
             # for col_name in data.columns:
             print("开始获取行情数据......" + row.name)
             get_k_data = ts.get_k_data(row.name, start='1990-12-19')
+            print(get_k_data);
             myData = pd.DataFrame(get_k_data)
             get_k_data.to_sql('k_data',engine,index=True,if_exists=if_exists)
             print("成功写入行情数据......" + row.name)
