@@ -11,10 +11,6 @@ import random
 import time
 import datetime
 
-mail_host="smtp.aliyun.com"  #设置服务器
-mail_user="dengyongqing@aliyun.com"    #用户名
-mail_pass="Dfzr.Rrqs@1"   #口令 
-
 def _format_addr(s):
     name, addr = parseaddr(s)
     return formataddr(( \
