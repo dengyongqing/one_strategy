@@ -18,15 +18,10 @@ def _format_addr(s):
         addr if isinstance(addr, str) else addr))
 
 def send_mail(stock, flag):
-    
-    # send_mail('dengyongqing@aliyun.com', my_stocks) #邓永庆
-    # send_mail('13816904330@163.com', my_stocks) #姜老板
-    # send_mail('317223343@qq.com', my_stocks) #陈贵
-    # send_mail('312204337@qq.com', my_stocks) #汤东强
 
-    sender = ['dengyongqing@aliyun.com']
-    receivers = ['dengyongqing_json@aliyun.com']
-    # receivers = ['dengyongqing@aliyun.com', '13816904330@163.com', '317223343@qq.com', '312204337@qq.com']
+    sender = ['deng@aliyun.com']
+    receivers = ['deng@aliyun.com']
+    # receivers = []
 
     for mail in receivers:   # 获取每行的index、row
         try:
@@ -51,9 +46,9 @@ def send_choose_mail(sender, receivers, stock):
     # smtp_server = raw_input('SMTP server: ')
     print("I'm working......发送邮件")
 
-    from_addr = 'dengyongqing_json@aliyun.com'
+    from_addr = 'deng@aliyun.com'
     password = ''
-    to_addr = 'dengyongqing@aliyun.com'
+    to_addr = 'deng@aliyun.com'
     smtp_server = 'smtp.aliyun.com'
     # random.uniform(10, 20)
     msg = MIMEText(stocks, 'plain', 'utf-8')
@@ -140,9 +135,9 @@ def send_sell_mail(sender, receivers, stock):
     # smtp_server = raw_input('SMTP server: ')
     print("I'm working......发送邮件")
 
-    from_addr = 'dengyongqing_json@aliyun.com'
+    from_addr = 'deng@aliyun.com'
     password = ''
-    to_addr = 'dengyongqing@aliyun.com'
+    to_addr = 'deng@aliyun.com'
     smtp_server = 'smtp.aliyun.com'
     # random.uniform(10, 20)
     msg = MIMEText(stocks, 'plain', 'utf-8')
